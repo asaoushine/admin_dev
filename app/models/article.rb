@@ -6,7 +6,7 @@ class Article < ActiveRecord::Base
   	state :draft, :initial => true
   	state :published
 
-  	event :publish, before: ->{ self.udpated_at = Time.now } do
+  	event :publish, before: ->{ self.updated_at = Time.now } do
   	  transitions from: :draft, to: :published
   	end
 

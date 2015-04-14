@@ -1,0 +1,10 @@
+h1 記事一覧
+= link_to '+ 新しい記事を作成する', new_admin_article_path, class: 'btn btn-primary btn-lg'
+
+- @articles.each do |article|
+  h2 = link_to article.title, admin_article_path(article)
+
+  .well
+    .div = article.body
+    .div = article.aasm_state
+

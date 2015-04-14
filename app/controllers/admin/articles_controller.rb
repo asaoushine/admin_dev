@@ -1,11 +1,11 @@
-class Admin::ArticleController < AuthorizedController
+class Admin::ArticlesController < AuthorizedController
 	
 	include AddBreadcrumbs
 
 	before_action :set_article, only: [:show, :edit, :update, :destroy, :publish, :draft]
 
 	def index
-		@articles = current_user.articles.all
+		@articles = Article.all
 	end
 
 	# GET /articles/1
@@ -27,7 +27,7 @@ class Admin::ArticleController < AuthorizedController
 
 		if @article.valid?
 		  @article.save!
-		  case params[:hoge][:fuga]
+		  case params[:arg]
 		  when 'publish'
 		  	@article.publish!
 		  	flash[:success] = '記事を公開しました。'
@@ -42,10 +42,39 @@ class Admin::ArticleController < AuthorizedController
 		end
 	end
 
+	def publish
+	  @article.publish!
+	  flash[:success] = '記事を公開しました。'
+	  redirect_to [:admin, @article]
+	end
+
+	def draft
+	  @article.draft!
+	  flash[:success] = '記事を下書きにしました。'
+	  redirect_to [:admin, @article]
+	end
+
+	def update
+	  @article.assign_attributes(article_params)
+	  if @article.valid?
+	  	@article.save!
+	  	flash[:success] = '記事を更新しました！'
+	  	redirect_to [:admin, @article]
+	  else
+	  	render :edit
+	  end
+	end
+
+	def destroy
+	  @article.destroy
+	  flash[:success] = '記事を削除しました。'
+	  redirect_to admin_url
+	end
+
 	private
 
 	  def set_article
-	  	@article = current_user.articles.find(params[:id])
+	  	@article = Article.find(params[:id])
 	  end
 
 	  def article_params

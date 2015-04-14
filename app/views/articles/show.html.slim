@@ -1,0 +1,22 @@
+- if current_user == @article.user
+  .pull-right
+    = link_to '編集', edit_admin_article_path(@article)
+
+h1
+  = link_to @article.title, "#{@article.id}"
+
+.div 
+  = raw @article.body
+
+.pull-right
+  = link_to root_url do 
+
+  	= image_tag @article.user.icon.thumb, width: 40, heigth: 40
+  	= @article.user.screen_name
+  = @article.created_at.to_s(:Ymd-format)
+
+.clearfix
+
+hr
+
+p これよりしたはコメントです。
