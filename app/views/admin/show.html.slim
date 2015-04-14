@@ -1,0 +1,53 @@
+.row
+  .col-sm-9
+    = link_to '+ 新しい記事を作成する', new_admin_article_path, class: 'btn btn-primary btn-lg'
+
+    h3
+      span 公開記事 
+      span.badge
+        = @articles.published.size
+
+    - @articles.published.each do |article|
+      .list-group
+        = link_to admin_article_path(article), class: 'list-group-item' do
+
+        	h3.list-group-item-heading
+        	  = article.title
+        	.list-group-item-text
+        	  = truncate(article.body)
+        	.list-group-item-text.pull-right
+        	  #{article.aasm_state}
+        	  = safe_date_localize article.updated_at
+        	.clerfix
+
+    h3
+      span 下書き記事 
+      span.badge = @articles.draft.size
+
+    - @articles.draft.each do |article|
+      .list-group
+        = link_to admin_article_path(article), class: 'list-group-item' do
+
+        	h3.list-group-item-heading
+        	  = truncate(article.body)
+        	list-group-item-text.pull-right
+        	  #{article.aasm_state}
+        	  = safe_date_localize article.updated_at
+        	.clearfix
+
+  .col-sm-3
+    .thumbnail
+      .text-center = image_tag current_user.icon.thumb
+      .caption.text-center
+        p #{current_user.user_name}
+        p #{current_user.screen_name}
+        p = current_user.user_description
+
+      .col-xs-12
+        = link_to 'プロフィール編集', edit_admin_settings_profiles_path, class: 'btn btn-default btn-block'
+      .col-xs-12
+        = link_to 'アカウント編集', edit_admin_settings_accounts_path, class: 'btn btn-default btn-block'
+
+
+
+

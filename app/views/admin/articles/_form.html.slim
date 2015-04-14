@@ -1,0 +1,18 @@
+= bootstrap_form_for [:admin, @article], layout: :horizontal do |f|
+
+  = f.alert_message '以下の項目を修正して下さい。'
+
+  = f.text_field :title, autofocus: true
+
+  = f.text_area :body, rows: 20
+
+  = f.static_control :aasm_state
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+
+      = f.button @article.new_record? ? '下書き保存' : '変更する', name: 'arg', value: 'save', class: 'btn btn-lg btn-default'
+
+      .pull-right
+        = link_to '削除する', [:admin, @article], :method => :delete, :data => { :confirm => '本当によろしいですか?' }, class: 'btn btn-danger btn-lg'
+

@@ -1,0 +1,25 @@
+- content_for(:container_class, 'dummy-container')
+.jumbotron.text-center
+  h1 Railsでのサンプルブログアプリケーション
+
+.text-center
+  = link_to '始める', new_user_registration_path, class: 'btn btn-success btn-lg'
+
+.cntainer
+  .row
+    .col-sm-12
+      .h4 最新記事
+      - Article.published.limit(10).each do |article|
+        .list-group
+          = link_to "#{article.id}", class: 'list-group-item' do
+
+          	h4.list-group-item-heading
+          	  = article.title
+          	p.list-group-item-text
+          	  = truncate article.body
+          	.pull-right
+          	  = article.user.screen_name
+          	  = safe_date_localize article.updated_at
+          	.clearfix
+
+      end 
