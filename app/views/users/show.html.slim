@@ -1,2 +1,14 @@
-h1 Users#show
-p Find me in app/views/users/show.html.slim
+- provide(:title, @user.screen_name)
+
+h1 My page
+= @user.screen_name
+
+
+
+.div
+  .ul
+    - @user.articles.each do |article|
+	  
+      li
+        = link_to article.title, 'http://localhost:3003/' + "#{article.id}"
+  
