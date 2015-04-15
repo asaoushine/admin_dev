@@ -8,12 +8,15 @@ h1
 .div 
   = raw @article.body
 
+
 .pull-right
-  = link_to root_url do 
+  = link_to user_url(@article.user.screen_name) do 
 
   	= image_tag @article.user.icon.thumb, width: 40, heigth: 40
   	= @article.user.screen_name
-  = @article.created_at.to_s(:Ymd-format)
+
+  = @article.created_at.to_s(:Ymd_format)
+  
 
 .clearfix
 

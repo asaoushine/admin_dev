@@ -1,0 +1,10 @@
+- if @breadcrumbs.present?
+  ol.breadcrumb
+    - @breadcrumbs.each_with_index do |breadcrumb, idx|
+      li
+        - case breadcrumb[1]
+        - when nil
+          = breadcrumb[0]
+        - else
+          = link_to breadcrumb[0], breadcrumb[1]
+          

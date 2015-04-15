@@ -17,7 +17,7 @@
         	  = truncate(article.body)
         	.list-group-item-text.pull-right
         	  #{article.aasm_state}
-        	  = safe_date_localize article.updated_at
+        	  = article.updated_at.to_s(:Ymd_format)
         	.clerfix
 
     h3
@@ -32,7 +32,7 @@
         	  = truncate(article.body)
         	list-group-item-text.pull-right
         	  #{article.aasm_state}
-        	  = safe_date_localize article.updated_at
+        	  = article.updated_at.to_s(:Ymd_format)
         	.clearfix
 
   .col-sm-3
@@ -44,9 +44,9 @@
         p = current_user.user_description
 
       .col-xs-12
-        = link_to 'プロフィール編集', edit_admin_settings_profiles_path, class: 'btn btn-default btn-block'
+        = link_to 'プロフィール編集', edit_admin_settings_profiles_path, class: 'btn btn-default'
       .col-xs-12
-        = link_to 'アカウント編集', edit_admin_settings_accounts_path, class: 'btn btn-default btn-block'
+        = link_to 'アカウント編集', edit_admin_settings_accounts_path, class: 'btn btn-default'
 
 
 
